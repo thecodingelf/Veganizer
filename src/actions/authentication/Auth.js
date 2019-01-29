@@ -1,0 +1,74 @@
+import firebase from 'firebase'
+import { Actions } from 'react-native-router-flux'
+
+export const CREATE_USER = 'create_user'
+export const CREATE_USER_FAIL = 'create_user_fail'
+export const USERNAME_CHANGED = 'username_changed'
+export const LOGIN_USER = 'login_user'
+export const LOGIN_USER_SUCCESS = 'login_user_success'
+export const LOGIN_USER_FAILED = 'login_user_failed'
+export const EMAIL_CHANGED = 'email_changed'
+export const PASSWORD_CHANGED = 'password_changed'
+
+export const createUser = (email, password, username) => {
+    return(dispatch) => {
+        dispatch({ type: CREATE_USER })
+
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(user => {
+                if(user.uid) {
+                    firebase.database().ref('/users/${user.uid}')
+                        .set({ username: username })
+                }
+            })
+            .then(Actions.pop())
+    }
+}
+
+export const usernameChanged = (text) => {
+    return {
+        type: USERNAME_CHANGED,
+        payload: text
+    }
+}
+
+export const loginUser = ({ email, password }) => {
+    return (dispatch) => {
+        dispatch({ type: LOGIN_USER })
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(user => loginUserSuccess(dispatch, user.uid))
+            .catch(() => loginUserFail(dispatch))
+    }
+}
+
+export const emailChanged = (text) => {
+    return {
+        type: EMAIL_CHANGED,
+        payload: text
+    }
+}
+
+export const createUserFail = (dispatch) => {
+    dispatch ({ type: CREATE_USER_FAIL })
+}
+
+export const passwordChanged = (text) => {
+    return {
+        type: PASSWORD_CHANGED,
+        payload: text
+    }
+}
+
+const loginUserSuccess = (dispatch, user) => {
+    dispatch({
+        type: LOGIN_USER_SUCCESS,
+        payload: user
+    })
+
+    Actions.menu()
+}
+
+const loginUserFail = (dispatch) => {
+    dispatch({ type: LOGIN_USER_FAILED })
+}
