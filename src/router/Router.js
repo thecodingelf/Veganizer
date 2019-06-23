@@ -1,9 +1,9 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import Loginform from '../components/authentication/LoginForm';
-//import SignUpForm from '../components/authentication/SignUpForm';
-//import ResetPassword from '../components/authentication/ResetPassword';
-import Menu from '../components/menu/Menu';
+import SignUpForm from '../components/authentication/SignUpForm';
+import ResetPassword from '../components/authentication/ResetPassword';
+import Main from '../components/main/Main';
 
 const RouterComponent = () => {
     return (
@@ -16,19 +16,19 @@ const RouterComponent = () => {
                         component={Loginform}
                         initial
                     />
-{/*                     <Scene
+                   <Scene
                         key="signUp"
                         component={SignUpForm}
-                    /> */}
-{/*                     <Scene
+                    />
+                    <Scene
                         key="resetPassword"
                         component={ResetPassword}
-                    /> */}
+                    />
                 </Scene>
-                <Scene key="main" hideNavBar>
+                <Scene key="menu" hideNavBar>
                     <Scene
-                        key="menu"
-                        component={Menu}
+                        key="main"
+                        component={Main}
                     />
                 </Scene>
             </Scene>

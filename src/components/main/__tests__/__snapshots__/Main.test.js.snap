@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+<View>
+  <Text>
+    Welcome to Kawa Demo!
+  </Text>
+  <Text>
+    To get started, create your river.
+  </Text>
+  <Text>
+    More features coming soon!
+  </Text>
+</View>
+`;
+
+exports[`Renders the view and text component 1`] = `
+<View>
+  <Text>
+    More features coming soon!
+  </Text>
+</View>
+`;

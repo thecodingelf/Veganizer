@@ -11,13 +11,18 @@ const instructions = Platform.select({
   })
   
 
-  class Menu extends Component {
+  class Main extends Component {
     
     render() {
+
+        const {
+            username
+        } = this.props.users
+
         return (
             <View /*style={containerStyle}*/>
                 <Text /*style={welcomeStyle}*/>
-                    Welcome to Kawa Demo!
+                    Welcome to Kawa Demo! {username}
                 </Text>
                 <Text /*style={instructionsStyle}*/>
                     To get started, create your river.
@@ -30,4 +35,4 @@ const instructions = Platform.select({
     }
 }
 
-export default Menu
+export default Main
